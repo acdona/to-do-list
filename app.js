@@ -6,14 +6,13 @@ const message = document.createElement('div')
 formAddTodo.prepend(message)
 message.classList.add("alert", "alert-danger", "message")
 message.setAttribute("role", "alert")
-message.textContent = "Este to-do já existe na lista"
 
 const addTodo = inputValue => {
 	if (inputValue.length) {
 
 		const arrayLIs = Array.from(todosContainer.children)
 			.map(li => li.textContent.trim())
-			
+
 		if (arrayLIs.includes(inputValue)) {
 			message.style.display = "block"
 			message.innerHTML = `<span>O to-do "${inputValue}" já existe na lista</span>`
