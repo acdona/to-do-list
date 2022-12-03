@@ -2,9 +2,25 @@ const formAddTodo = document.querySelector('.form-add-todo')
 const todosContainer = document.querySelector('.todos-container')
 const inputSearch = document.querySelector('.form-search input')
 
+const message = document.createElement('div')
+formAddTodo.prepend(message)
+message.classList.add("alert", "alert-danger", "message")
+message.setAttribute("role", "alert")
+message.textContent = "Este to-do já existe na lista"
 
 const addTodo = inputValue => {
 	if (inputValue.length) {
+
+		const arrayLIs = Array.from(todosContainer.children)
+			.map(li => li.textContent.trim())
+			
+		if (arrayLIs.includes(inputValue)) {
+			message.style.display = "block"
+			message.innerHTML = `<span>O to-do "${inputValue}" já existe na lista</span>`
+			setTimeout('message.style.display = "none"', 2000)
+			return
+		}
+
 		todosContainer.innerHTML += `
 		<li class="list-group-item d-flex justify-content-between align-items-center" data-todo="${inputValue}">
 		  <span>${inputValue}</span>
@@ -61,5 +77,5 @@ inputSearch.addEventListener('input', event => {
 	const inputValue = event.target.value.trim().toLowerCase()
 	const todos = Array.from(todosContainer.children)
 	hideTodos(todos, inputValue)
-	showTodos(todos,inputValue)
+	showTodos(todos, inputValue)
 })
