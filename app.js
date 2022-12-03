@@ -18,3 +18,16 @@ formAddTodo.addEventListener('submit', event => {
 	addTodo(inputValue)
 	event.target.reset()
 })
+
+const todoRemove = clickedElement => {
+	const trashDataValue = clickedElement.dataset.trash
+	const todo = document.querySelector(`[data-todo="${trashDataValue}"]`)
+	if (trashDataValue) {
+		todo.remove()
+	}
+}
+
+todosContainer.addEventListener('click', event => {
+	const clickedElement = event.target
+	todoRemove(clickedElement)
+})
