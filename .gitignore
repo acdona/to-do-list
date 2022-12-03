@@ -1,0 +1,34 @@
+##### Notepad++
+# Notepad++ backups #
+*.bak
+
+##### VisualStudioCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# Backup copies created by various editors or development tools
+*~
+
+# Patches downloaded to patch files or to apply open source contributions
+*.patch
+
+# Swap files created by editors and tools to indicate a locked file
+*.swp
+
+# Various temporary generated files
+*.tmp
+
+# config.php
+config.php
+
+# pasta de testes
+testes/**/*
+tests/**/*
+documents/**/*
+database/**/*
+vendor/**/*
+*empty
