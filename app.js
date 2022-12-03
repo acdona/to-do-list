@@ -1,5 +1,7 @@
 const formAddTodo = document.querySelector('.form-add-todo')
 const todosContainer = document.querySelector('.todos-container')
+const inputSearch = document.querySelector('.form-search input')
+
 
 const addTodo = inputValue => {
 	if (inputValue.length) {
@@ -30,4 +32,23 @@ const todoRemove = clickedElement => {
 todosContainer.addEventListener('click', event => {
 	const clickedElement = event.target
 	todoRemove(clickedElement)
+})
+
+inputSearch.addEventListener('input', event => {
+	const inputValue = event.target.value.trim().toLowerCase()
+	const todos = Array.from(todosContainer.children)
+
+	todos
+		.filter(todo => !todo.textContent.toLowerCase().includes(inputValue))
+		.forEach(todo => {
+			todo.classList.remove('d-flex')
+			todo.classList.add('hidden')
+		})
+
+	todos
+		.filter(todo => todo.textContent.toLowerCase().includes(inputValue))
+		.forEach(todo => {
+			todo.classList.remove('hidden')
+			todo.classList.add('d-flex')
+		})
 })
