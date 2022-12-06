@@ -26,10 +26,10 @@
 	background: #484E53;
   }
   
-  i[data-trash] {
+  i[data-trash], i[data-edit] {
 	cursor: pointer;
   }
-  
+    
   .hidden {
 	display: none;
   }
@@ -38,4 +38,10 @@
 	  display: none;
 	  color: #333;
 	  font-size: 1em;
+  }
+
+  li {
+	display: flex;
+	align-items: center;
+	justify-content: center;
   }

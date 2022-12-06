@@ -8,25 +8,20 @@ message.classList.add("alert", "alert-danger", "message")
 message.setAttribute("role", "alert")
 
 const addTodo = inputValue => {
-	if (inputValue.length) {
-
-		const arrayLIs = Array.from(todosContainer.children)
-			.map(li => li.textContent.trim())
-
-		if (arrayLIs.includes(inputValue)) {
-			message.style.display = "block"
-			message.innerHTML = `<span>O to-do "${inputValue}" já existe na lista</span>`
-			setTimeout('message.style.display = "none"', 2000)
-			return
-		}
-
-		todosContainer.innerHTML += `
+	const arrayLIs = Array.from(todosContainer.children)
+		.map(li => li.textContent.trim())
+	if (inputValue.length && arrayLIs.includes(inputValue)) {
+		message.style.display = "block"
+		message.innerHTML = `<span>O to-do "${inputValue}" já existe na lista</span>`
+		setTimeout('message.style.display = "none"', 2000)
+		return
+	}
+	todosContainer.innerHTML += `
 		<li class="list-group-item d-flex justify-content-between align-items-center" data-todo="${inputValue}">
 		  <span>${inputValue}</span>
 		  <i class="far fa-trash-alt" data-trash="${inputValue}"></i>
 		</li>
 		`
-	}
 }
 
 formAddTodo.addEventListener('submit', event => {
