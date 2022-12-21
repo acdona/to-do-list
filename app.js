@@ -17,11 +17,14 @@ const addTodo = inputValue => {
 		return
 	}
 	todosContainer.innerHTML += `
-		<li class="list-group-item d-flex justify-content-between align-items-center" data-todo="${inputValue}">
-		  <span>${inputValue}</span>
-		  <i class="far fa-trash-alt" data-trash="${inputValue}"></i>
-		</li>
-		`
+	<li class="list-group-item d-flex justify-content-between align-items-center" data-todo="${inputValue}">
+		<span>${inputValue}</span>
+		<div align-items-right>
+			<i class="far fa-edit" data-edit="${inputValue}"></i>
+			<i class="far fa-trash-alt" data-trash="${inputValue}"></i>
+		</div>
+	</li>
+	`
 }
 
 formAddTodo.addEventListener('submit', event => {
@@ -30,6 +33,14 @@ formAddTodo.addEventListener('submit', event => {
 	addTodo(inputValue)
 	event.target.reset()
 })
+
+const todoEdit = clickedElement => {
+	const editDataValue = clickedElement.dataset.edit
+	const todo = document.querySelector(`[data-todo="${editDataValue}"]`)
+	if (editDataValue) {
+		console.log(`editar: ${editDataValue}`)
+	}
+}
 
 const todoRemove = clickedElement => {
 	const trashDataValue = clickedElement.dataset.trash
