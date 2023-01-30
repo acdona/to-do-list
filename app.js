@@ -2,16 +2,14 @@ const formAddTodo = document.querySelector('.form-add-todo')
 const formSearch = document.querySelector('.form-search')
 const todosContainer = document.querySelector('.todos-container')
 const inputSearch = document.querySelector('.form-search input')
-let inputValuePopup
 
 /* POPUP EDITAR */
 const formPopup = document.querySelector('.form-popup')
-const inputPopup = document.querySelector('#input-popup')
+const inputPopup = document.querySelector('#inputpopup')
 const popup = document.querySelector('.popup-wrapper')
 const closeButton = document.querySelector('.popup-close')
-const okPopup = document.querySelector("#okPopup")
 
-closeButton.addEventListener('click', event => {
+closeButton.addEventListener('click', () => {
 	popup.style.display = 'none'
 })
 
@@ -65,28 +63,30 @@ formAddTodo.addEventListener('submit', event => {
 const todoEdit = clickedElement => {
 	let editDataValue = clickedElement.dataset.edit
 	let todo = document.querySelector(`[data-todo="${editDataValue}"]`)
+	
 	popup.style.display = 'block'
 	inputPopup.value = editDataValue
 	
-	newValue = inputPopup.value
+	let newValue = inputPopup.value
 	inputPopup.select()	
 	
 	formPopup.addEventListener('submit', event => {
 		event.preventDefault()
 		newValue = inputPopup.value
-	
+	console.log(todo) // está alterando mais de um item
 		if (newValue) {
 			todo.dataset.todo = newValue
 			todo.textContent = newValue
 			todo.innerHTML = `
 			  <span>${newValue}</span>
 			  <div align-items-right>
-				  <i class="far fa-eye" data-show="${newValue}"></i>
+				<i class="far fa-eye" data-show="${newValue}"></i>
 				<i class="far fa-edit" data-edit="${newValue}"></i>
 				<i class="far fa-trash-alt" data-trash="${newValue}"></i>
 			  </div>
 		   `  
 		   popup.style.display = 'none'
+		   return 
 		}
 	})
 }
@@ -99,6 +99,7 @@ const todoRemove = clickedElement => {
 	}
 }
 
+// em implantação
 const todoShow = clickedElement => {
 	let showDataValue = clickedElement.dataset.show
 	let todo = document.querySelector(`[data-todo="${showDataValue}"]`)
