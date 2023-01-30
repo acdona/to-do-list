@@ -9,7 +9,6 @@ message.classList.add("alert", "alert-danger", "message")
 message.setAttribute("role", "alert")
 
 const addTodo = inputValue => {
-
 	if (inputValue.length) {
 
 		const arrayLIs = Array.from(todosContainer.children).map(li => li.textContent.trim())
