@@ -4,7 +4,7 @@ const todosContainer = document.querySelector('.todos-container')
 const inputSearch = document.querySelector('.form-search input')
 let inputValuePopup
 
-/* POPUP */
+/* POPUP EDITAR */
 const formPopup = document.querySelector('.form-popup')
 const inputPopup = document.querySelector('#input-popup')
 const popup = document.querySelector('.popup-wrapper')
@@ -106,6 +106,8 @@ const todoShow = clickedElement => {
 		popup.style.display = 'block'
 		inputPopup.value = showDataValue
 		inputPopup.select()
+		console.log(todo)
+		popup.style.display = 'none'
 	}
 }
 
