@@ -1,4 +1,5 @@
 const formAddTodo = document.querySelector('.form-add-todo')
+const formSearch = document.querySelector('.form-search')
 const todosContainer = document.querySelector('.todos-container')
 const inputSearch = document.querySelector('.form-search input')
 
@@ -40,10 +41,19 @@ formAddTodo.addEventListener('submit', event => {
 })
 
 const todoEdit = clickedElement => {
-	const editDataValue = clickedElement.dataset.edit
-	const todo = document.querySelector(`[data-todo="${editDataValue}"]`)
-	if (editDataValue) {
-		console.log(`editar: ${editDataValue}`)
+	let editDataValue = clickedElement.dataset.edit
+	let todo = document.querySelector(`[data-todo="${editDataValue}"]`)
+	let newValue = prompt("Digite o novo valor:", editDataValue)
+	if (newValue) {
+		todo.dataset.todo = newValue
+		todo.textContent = newValue
+		todo.innerHTML = `
+		  <span>${newValue}</span>
+		  <div align-items-right>
+			<i class="far fa-edit" data-edit="${newValue}"></i>
+			<i class="far fa-trash-alt" data-trash="${newValue}"></i>
+		  </div>
+	   `
 	}
 }
 
@@ -57,8 +67,12 @@ const todoRemove = clickedElement => {
 
 todosContainer.addEventListener('click', event => {
 	const clickedElement = event.target
-	todoRemove(clickedElement)
-	todoEdit(clickedElement)
+	if (clickedElement.dataset.trash) {
+		todoRemove(clickedElement)
+	}
+	if (clickedElement.dataset.edit) {
+		todoEdit(clickedElement)
+	}
 })
 
 const filterTodos = (todos, inputValue, returnMatchedTodos) => todos
@@ -83,6 +97,11 @@ const showTodos = (todos, inputValue) => {
 	const todosToShow = filterTodos(todos, inputValue, true)
 	manipulateClasses(todosToShow, 'd-flex', 'hidden')
 }
+
+formSearch.addEventListener('submit', event => {
+	event.preventDefault()
+	return false
+})
 
 inputSearch.addEventListener('input', event => {
 	const inputValue = event.target.value.trim().toLowerCase()
