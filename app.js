@@ -11,13 +11,14 @@ message.setAttribute("role", "alert")
 const addTodo = inputValue => {
 	if (inputValue.length) {
 
-		const arrayLIs = Array.from(todosContainer.children).map(li => li.textContent.trim())
+		const arrayLIs = Array.from(todosContainer.children).map(li => li.textContent.trim().toLowerCase())
 
-		if (!arrayLIs.includes(inputValue)) {
+		if (!arrayLIs.includes(inputValue.toLowerCase())) {
 			todosContainer.innerHTML += `
 			<li class="list-group-item d-flex justify-content-between align-items-center" data-todo="${inputValue}">
 				<span>${inputValue}</span>
 				<div align-items-right>
+					<i class="far fa-eye" data-show="${inputValue}"></i>
 					<i class="far fa-edit" data-edit="${inputValue}"></i>
 					<i class="far fa-trash-alt" data-trash="${inputValue}"></i>
 				</div>
@@ -49,6 +50,7 @@ const todoEdit = clickedElement => {
 		todo.innerHTML = `
 		  <span>${newValue}</span>
 		  <div align-items-right>
+		  	<i class="far fa-eye" data-show="${newValue}"></i>
 			<i class="far fa-edit" data-edit="${newValue}"></i>
 			<i class="far fa-trash-alt" data-trash="${newValue}"></i>
 		  </div>
@@ -64,6 +66,14 @@ const todoRemove = clickedElement => {
 	}
 }
 
+const todoShow = clickedElement => {
+	const showDataValue = clickedElement.dataset.show
+	const todo = document.querySelector(`[data-todo="${showDataValue}"]`)
+	if (showDataValue) {
+		console.log(todo.dataset.todo)
+	}
+}
+
 todosContainer.addEventListener('click', event => {
 	const clickedElement = event.target
 	if (clickedElement.dataset.trash) {
@@ -71,6 +81,9 @@ todosContainer.addEventListener('click', event => {
 	}
 	if (clickedElement.dataset.edit) {
 		todoEdit(clickedElement)
+	}
+	if (clickedElement.dataset.show) {
+		todoShow(clickedElement)
 	}
 })
 

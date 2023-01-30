@@ -26,7 +26,7 @@
 	background: #484E53;
   }
   
-  i[data-trash], i[data-edit] {
+  i[data-trash], i[data-edit], i[data-show] {
 	cursor: pointer;
   }
     
