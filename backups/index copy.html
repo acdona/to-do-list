@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+	<meta charset="utf-8">
+	<link rel="icon" href="favicon.ico">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="msapplication-tap-highlight" content="no">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+		integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous" />
+	<link rel="stylesheet" type="text/css" href="style.css">
+
+	<title>To-do List</title>
+
+</head>
+
+<body class="bg-dark">
+
+	<div class="container">
+		<header class="text-center text-light my-4">
+			<h1 class="mb-4">To-do List</h1>
+			<form class="form-search">
+				<input class="form-control m-auto" type="text" name="search" placeholder="Buscar to-do" autofocus>
+			</form>
+		</header>
+
+		<ul class="todos-container list-group mx-auto text-light">
+			<li class="list-group-item d-flex justify-content-between align-items-center" data-todo="Fazer compras na feira">
+				<span>Fazer compras na feira</span>
+				<div align-items-right>
+					<i class="far fa-edit" data-edit="Fazer compras na feira"></i>
+					<i class="far fa-trash-alt" data-trash="Fazer compras na feira"></i>
+				</div>
+			</li>
+
+			<li class="list-group-item d-flex justify-content-between align-items-center" data-todo="Estudar geografia">
+				<span>Estudar geografia</span>
+				<div align-items-right>
+					<i class="far fa-edit" data-edit="Estudar geografia"></i>
+					<i class="far fa-trash-alt" data-trash="Estudar geografia"></i>
+				</div>
+			</li>
+
+			<li class="list-group-item d-flex justify-content-between align-items-center" data-todo="Praticar exercícios físicos">
+				<span>Praticar exercícios físicos</span>
+				<div align-items-right>
+					<i class="far fa-edit" data-edit="Praticar exercícios físicos"></i>
+					<i class="far fa-trash-alt" data-trash="Praticar exercícios físicos"></i>
+				</div>
+			</li>
+		</ul>
+
+		<form class="form-add-todo text-center my-4">
+			<label class="text-light">Adicionar to-do</label>
+			<input type="text" name="add" class="form-control m-auto">
+		</form>
+
+	</div>
+
+	<script src="app.js"></script>
+
+</body>
+
+</html>
