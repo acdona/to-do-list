@@ -74,8 +74,7 @@ const todoEdit = clickedElement => {
 	formPopup.addEventListener('submit', event => {
 		event.preventDefault()
 		newValue = inputPopup.value
-		console.log(newValue)
-
+	
 		if (newValue) {
 			todo.dataset.todo = newValue
 			todo.textContent = newValue
@@ -86,9 +85,7 @@ const todoEdit = clickedElement => {
 				<i class="far fa-edit" data-edit="${newValue}"></i>
 				<i class="far fa-trash-alt" data-trash="${newValue}"></i>
 			  </div>
-		   `
-		   newValue = ""
-		   inputPopup.value = ""
+		   `  
 		   popup.style.display = 'none'
 		}
 	})
