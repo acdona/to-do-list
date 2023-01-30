@@ -2,6 +2,28 @@ const formAddTodo = document.querySelector('.form-add-todo')
 const formSearch = document.querySelector('.form-search')
 const todosContainer = document.querySelector('.todos-container')
 const inputSearch = document.querySelector('.form-search input')
+let inputValuePopup
+
+/* POPUP */
+const formPopup = document.querySelector('.form-popup')
+const inputPopup = document.querySelector('#input-popup')
+const popup = document.querySelector('.popup-wrapper')
+const closeButton = document.querySelector('.popup-close')
+const okPopup = document.querySelector("#okPopup")
+
+closeButton.addEventListener('click', event => {
+	popup.style.display = 'none'
+})
+
+popup.addEventListener('click', event => {
+	const classNameOfClickedElement = event.target.classList[0]
+	const classNames = ['popup-close', 'popup-wrapper', 'popup-link']
+	const shouldClosePopup = classNames.some(className =>
+		className === classNameOfClickedElement)
+	if (shouldClosePopup) {
+		popup.style.display = 'none'
+	}
+})
 
 const message = document.createElement('div')
 formAddTodo.prepend(message)
@@ -43,19 +65,33 @@ formAddTodo.addEventListener('submit', event => {
 const todoEdit = clickedElement => {
 	let editDataValue = clickedElement.dataset.edit
 	let todo = document.querySelector(`[data-todo="${editDataValue}"]`)
-	let newValue = prompt("Digite o novo valor:", editDataValue)
-	if (newValue) {
-		todo.dataset.todo = newValue
-		todo.textContent = newValue
-		todo.innerHTML = `
-		  <span>${newValue}</span>
-		  <div align-items-right>
-		  	<i class="far fa-eye" data-show="${newValue}"></i>
-			<i class="far fa-edit" data-edit="${newValue}"></i>
-			<i class="far fa-trash-alt" data-trash="${newValue}"></i>
-		  </div>
-	   `
-	}
+	popup.style.display = 'block'
+	inputPopup.value = editDataValue
+	
+	newValue = inputPopup.value
+	inputPopup.select()	
+	
+	formPopup.addEventListener('submit', event => {
+		event.preventDefault()
+		newValue = inputPopup.value
+		console.log(newValue)
+
+		if (newValue) {
+			todo.dataset.todo = newValue
+			todo.textContent = newValue
+			todo.innerHTML = `
+			  <span>${newValue}</span>
+			  <div align-items-right>
+				  <i class="far fa-eye" data-show="${newValue}"></i>
+				<i class="far fa-edit" data-edit="${newValue}"></i>
+				<i class="far fa-trash-alt" data-trash="${newValue}"></i>
+			  </div>
+		   `
+		   newValue = ""
+		   inputPopup.value = ""
+		   popup.style.display = 'none'
+		}
+	})
 }
 
 const todoRemove = clickedElement => {
@@ -67,10 +103,12 @@ const todoRemove = clickedElement => {
 }
 
 const todoShow = clickedElement => {
-	const showDataValue = clickedElement.dataset.show
-	const todo = document.querySelector(`[data-todo="${showDataValue}"]`)
+	let showDataValue = clickedElement.dataset.show
+	let todo = document.querySelector(`[data-todo="${showDataValue}"]`)
 	if (showDataValue) {
-		console.log(todo.dataset.todo)
+		popup.style.display = 'block'
+		inputPopup.value = showDataValue
+		inputPopup.select()
 	}
 }
 
