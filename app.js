@@ -22,6 +22,7 @@ popup.addEventListener('click', event => {
 		popup.style.display = 'none'
 	}
 })
+/* FIM POPUP EDITAR */
 
 const message = document.createElement('div')
 formAddTodo.prepend(message)
@@ -69,26 +70,28 @@ const todoEdit = clickedElement => {
 	
 	let newValue = inputPopup.value
 	inputPopup.select()	
-	
-	formPopup.addEventListener('submit', event => {
+
+	const handleSubmit = event => {
 		event.preventDefault()
 		newValue = inputPopup.value
-	console.log(todo) // está alterando mais de um item
 		if (newValue) {
 			todo.dataset.todo = newValue
 			todo.textContent = newValue
 			todo.innerHTML = `
-			  <span>${newValue}</span>
-			  <div align-items-right>
-				<i class="far fa-eye" data-show="${newValue}"></i>
-				<i class="far fa-edit" data-edit="${newValue}"></i>
-				<i class="far fa-trash-alt" data-trash="${newValue}"></i>
-			  </div>
-		   `  
-		   popup.style.display = 'none'
-		   return 
+			<span>${newValue}</span>
+			<div align-items-right>
+			<i class="far fa-eye" data-show="${newValue}"></i>
+			<i class="far fa-edit" data-edit="${newValue}"></i>
+			<i class="far fa-trash-alt" data-trash="${newValue}"></i>
+			</div>
+			`  
+			popup.style.display = 'none'
+			formPopup.removeEventListener('submit', handleSubmit) // remover evento após submit
+			
 		}
-	})
+	}
+	
+	formPopup.addEventListener('submit', handleSubmit)
 }
 
 const todoRemove = clickedElement => {
@@ -99,7 +102,7 @@ const todoRemove = clickedElement => {
 	}
 }
 
-// em implantação
+// em implantação - construir modal só para mostrar o item
 const todoShow = clickedElement => {
 	let showDataValue = clickedElement.dataset.show
 	let todo = document.querySelector(`[data-todo="${showDataValue}"]`)
